@@ -8,6 +8,7 @@ module.exports = {
     index: "./src/scripts/index.js",
     weatherData: "./src/scripts/weatherData.js",
     pubsub: "./src/scripts/pubsub.js",
+    initialPage: "./src/scripts/initialPage.js",
   },
   devtool: "inline-source-map",
   plugins: [

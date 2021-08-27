@@ -40,10 +40,10 @@ const unsubscribe = function (eventName, fn) {
  * @param {string} eventName - Name of the event
  * @param {*} data -data to be passed into callback
  */
-const publish = function (eventName, data) {
+const publish = async function (eventName, data) {
   if (events[eventName]) {
-    events[eventName].forEach(function (fn) {
-      fn(data);
+    await events[eventName].forEach(async function (fn) {
+      await fn(data);
     });
   }
 };

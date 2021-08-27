@@ -1,4 +1,4 @@
-import { isAfter } from "date-fns";
+import { isAfter, format } from "date-fns";
 
 // @ts-check
 
@@ -29,19 +29,37 @@ const findLocationWeather = async (location, standard) => {
 class InformationMaker {
   /**
    * Object constructor
-   * @param {Object} retrievedData - Retrieved data from APi
+   * @param {Object} retrievedData - Retrieved data from API
    * @param {String} standard
    */
   constructor(retrievedData, standard) {
+    this.country = retrievedData.sys.country;
+    this.city = retrievedData.name;
+    this.humidity = retrievedData.main.humidity + "%";
+    this.sunrise = retrievedData.sys.sunrise;
+    this.sunset = retrievedData.sys.sunset;
+    this.date = retrievedData.dt;
+    this.icon = `http://openweathermap.org/img/wn/${retrievedData.weather[0].icon}@2x.png`;
+    if (retrievedData.rain["1h"]) {
+      this.rainVolume = retrievedData.rain["1h"] + "mm";
+    }
+    if (retrievedData.snow["1h"]) {
+      this.snowVolume = retrievedData.snow["1h"] + "mm";
+    }
+    this.description = retrievedData.weather[0].description;
+    this.pressure = retrievedData.main.pressure + "hPa";
     if (standard === "metric") {
-      this.country = retrievedData.sys.country;
-      this.description = retrievedData.weather[0].description;
       this.feelsLike = retrievedData.main.feels_like + "\u00B0C";
       this.temperature = retrievedData.main.temp + "\u00B0C";
-      this.humidity = retrievedData.main.humidity + "%";
-      this.sunrise = retrievedData.sys.sunrise;
-      this.sunset = retrievedData.sys.sunset;
-      this.windSpeed = retrievedData.wind.speed;
+      this.minTemperature = retrievedData.main.temp_min + "\u00B0C";
+      this.maxTemperature = retrievedData.main.temp_max + "\u00B0C";
+      this.windSpeed = retrievedData.wind.speed + "m/s";
+    } else {
+      this.feelsLike = retrievedData.main.feels_like + "\u00B0F";
+      this.temperature = retrievedData.main.temp + "\u00B0F";
+      this.minTemperature = retrievedData.main.temp_min + "\u00B0C";
+      this.maxTemperature = retrievedData.main.temp_max + "\u00B0C";
+      this.windSpeed = retrievedData.wind.speed + "miles/hour";
     }
   }
   /**
@@ -60,17 +78,50 @@ class InformationMaker {
       return "Night";
     }
   }
+  /**
+   * get full location
+   * @return {string}
+   */
+  getfullLocation() {
+    return `${this.city}, ${this.country}`;
+  }
+  /**
+   * get full date
+   * @return {string}
+   */
+  getDate() {
+    return format(new Date(this.date * 1000), "PPPP");
+  }
+  /**
+   * get full time
+   * @return {string}
+   */
+  getTime() {
+    return format(new Date(this.date * 1000), "p");
+  }
 }
 
-const retrieveInformation = async (location, standard = "metric") => {
-  const data = await findLocationWeather(location, standard);
-  if (data.cod === 200) {
-    const information = new InformationMaker(data, standard);
-    console.log(information);
-    console.log(information.getDayOrNight());
-  } else {
-    console.log(data.message);
+/**
+ * Retrieve weather information about location
+ * @param {string} location
+ * @param {string} standard
+ * @return {Promise<any>} - A promise that resolves to weather information
+ */
+const retrieveInformation = async (location = "Lagos", standard = "metric") => {
+  try {
+    const data = await findLocationWeather(location, standard);
+    if (data.cod === 200) {
+      data.snow = data.snow || 0;
+      data.rain = data.rain || 0;
+      const information = new InformationMaker(data, standard);
+      return information;
+    } else {
+      console.log(data.message);
+    }
+  } catch (err) {
+    console.error(err);
   }
 };
+retrieveInformation();
 
-retrieveInformation("lagos", "metric");
+export default retrieveInformation;

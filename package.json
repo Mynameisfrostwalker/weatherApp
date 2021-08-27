@@ -4,14 +4,14 @@
   "description": "",
   "private": "true",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "doc": "jsdoc -c jsdoc.json"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mynameisfrostwalker/weatherApp.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Frostwalker",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Mynameisfrostwalker/weatherApp/issues"
@@ -31,6 +31,7 @@
     "webpack-cli": "^4.8.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "date-fns": "^2.23.0"
   }
 }

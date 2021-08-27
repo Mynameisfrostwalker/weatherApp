@@ -1,0 +1,44 @@
+main {
+    width: 100vw;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 0.5rem;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+#searchBar {
+    display: flex;
+    box-shadow: 0px 0px 4px 4px black;
+    width: 100%;
+    padding: 0.2rem;
+    border-radius: 50px;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+input[type="text"] {
+    border: none;
+    background-color: transparent;
+    width: inherit;
+    outline: none;
+}
+
+.grid {
+    height: 40vh;
+    width: 20vw;
+}
+
+#Form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+label {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
