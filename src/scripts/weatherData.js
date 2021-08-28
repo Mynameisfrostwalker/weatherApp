@@ -122,6 +122,5 @@ const retrieveInformation = async (location = "Lagos", standard = "metric") => {
     console.error(err);
   }
 };
-retrieveInformation();
 
-export default retrieveInformation;
+export { retrieveInformation };

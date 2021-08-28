@@ -1,4 +1,5 @@
 import Icon from "../images/initial.jpg";
+import { publish } from "./pubsub";
 
 // @ts-check
 
@@ -23,6 +24,7 @@ const formCreate = () => {
   const searchBar = document.createElement("div");
   searchBar.id = "searchBar";
   const icon = document.createElement("div");
+  icon.id = "icon";
   const i = document.createElement("i");
   i.classList.add("fas");
   i.classList.add("fa-search");
@@ -54,6 +56,10 @@ const gridCreator = (identifier) => {
   return div;
 };
 
+/**
+ * Loads inital page.
+ * @function
+ */
 const initialPageLoad = () => {
   const myImage = new Image();
   myImage.src = Icon;
@@ -69,6 +75,9 @@ const initialPageLoad = () => {
   container.appendChild(gridCreator("temp"));
   container.appendChild(gridCreator("minMax"));
   container.appendChild(gridCreator("volume"));
+  const icon = document.querySelector("#icon");
+  publish("pageLoaded", icon);
+  console.log("b");
 };
 
-export default initialPageLoad;
+export { initialPageLoad };

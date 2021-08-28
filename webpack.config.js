@@ -6,8 +6,9 @@ module.exports = {
   mode: "development",
   entry: {
     index: "./src/scripts/index.js",
-    weatherData: "./src/scripts/weatherData.js",
     pubsub: "./src/scripts/pubsub.js",
+    search: "./src/scripts/search.js",
+    weatherData: "./src/scripts/weatherData.js",
     initialPage: "./src/scripts/initialPage.js",
   },
   devtool: "inline-source-map",

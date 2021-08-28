@@ -5,9 +5,13 @@
  */
 
 /**
- * @type {Object} - Object of events.
+ * @return {Object}
  */
+
 const events = {};
+
+const bat = "battt";
+console.log(bat);
 
 /**
  * Subscribe to an event
@@ -40,10 +44,10 @@ const unsubscribe = function (eventName, fn) {
  * @param {string} eventName - Name of the event
  * @param {*} data -data to be passed into callback
  */
-const publish = async function (eventName, data) {
+const publish = function (eventName, data) {
   if (events[eventName]) {
-    await events[eventName].forEach(async function (fn) {
-      await fn(data);
+    events[eventName].forEach(function (fn) {
+      fn(data);
     });
   }
 };
