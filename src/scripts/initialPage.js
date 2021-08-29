@@ -61,8 +61,6 @@ const gridCreator = (identifier) => {
  * @function
  */
 const initialPageLoad = () => {
-  const myImage = new Image();
-  myImage.src = Icon;
   const form = formCreate();
   const formDiv = gridCreator("Form");
   formDiv.appendChild(form);
@@ -77,7 +75,6 @@ const initialPageLoad = () => {
   container.appendChild(gridCreator("volume"));
   const icon = document.querySelector("#icon");
   publish("pageLoaded", icon);
-  console.log("b");
 };
 
 export { initialPageLoad };

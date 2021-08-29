@@ -10,9 +10,6 @@
 
 const events = {};
 
-const bat = "battt";
-console.log(bat);
-
 /**
  * Subscribe to an event
  * @param {string} eventName - Name of the event

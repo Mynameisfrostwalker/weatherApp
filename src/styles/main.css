@@ -25,20 +25,48 @@ input[type="text"] {
     background-color: transparent;
     width: inherit;
     outline: none;
+    color: inherit;
 }
 
 .grid {
     height: 40vh;
     width: 20vw;
-}
-
-#Form {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+#countryDetails {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+#weatherDescription, 
+#humidPressureWind, 
+#date, 
+#temp, 
+#minMax, 
+#volume {
+    font-weight: bold;
+    flex-direction: column;
+    font-size: 1.3rem;
+}
+
+#weatherDescription img {
+    align-self: flex-start;
+}
+
 label {
     font-weight: bold;
     font-size: 1.3rem;
+}
+
+p {
+    width: 100%;
+}
+
+.align {
+    display: flex;
+    width: 100%;
+    padding: 0.3rem;
 }

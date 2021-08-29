@@ -82,7 +82,7 @@ class InformationMaker {
    * get full location
    * @return {string}
    */
-  getfullLocation() {
+  getFullLocation() {
     return `${this.city}, ${this.country}`;
   }
   /**
@@ -111,8 +111,13 @@ const retrieveInformation = async (location = "Lagos", standard = "metric") => {
   try {
     const data = await findLocationWeather(location, standard);
     if (data.cod === 200) {
-      data.snow = data.snow || 0;
-      data.rain = data.rain || 0;
+      console.log(data);
+      if (!data.snow) {
+        data.snow = 0;
+      }
+      if (!data.rain) {
+        data.rain = 0;
+      }
       const information = new InformationMaker(data, standard);
       return information;
     } else {

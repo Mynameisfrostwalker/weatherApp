@@ -10,6 +10,7 @@ module.exports = {
     search: "./src/scripts/search.js",
     weatherData: "./src/scripts/weatherData.js",
     initialPage: "./src/scripts/initialPage.js",
+    display: "./src/scripts/display.js",
   },
   devtool: "inline-source-map",
   plugins: [
