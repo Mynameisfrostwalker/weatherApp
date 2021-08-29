@@ -70,3 +70,26 @@ p {
     width: 100%;
     padding: 0.3rem;
 }
+
+#errorDisplay{
+    color: red;
+}
+
+#standardDiv {
+    display: flex;
+}
+
+.standards {
+    margin: 0.2rem;
+    padding: 0.1rem;
+}
+
+.activeBlack {
+    box-shadow: 0px 0px 2px 2px black;
+    cursor: pointer;
+}
+
+.activeWhite {
+    box-shadow: 0px 0px 2px 2px white;
+    cursor: pointer;
+}

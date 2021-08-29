@@ -5,6 +5,7 @@ import { initialPageLoad } from "./initialPage";
 import { subscribe } from "./pubsub";
 import { searchEventListener } from "./search";
 import { display } from "./display";
+import { switchActive } from "./switch";
 
 // @ts-check
 
@@ -14,6 +15,8 @@ import { display } from "./display";
  */
 
 subscribe("pageLoaded", searchEventListener);
+
+subscribe("pageLoaded", switchActive);
 
 subscribe("display", display);
 

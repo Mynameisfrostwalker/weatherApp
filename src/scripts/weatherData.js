@@ -14,6 +14,7 @@ import { isAfter, format } from "date-fns";
  */
 const findLocationWeather = async (location, standard) => {
   try {
+    console.log(standard);
     const response = await fetch(
       `http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=81d1f6e5ed77f7c8c9da1dcc073ad7c6&units=${standard}`,
       { mode: "cors" }
@@ -21,7 +22,8 @@ const findLocationWeather = async (location, standard) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    throw new Error(error);
+    const errorDisplay = document.querySelector("#errorDisplay");
+    errorDisplay.textContent = `Network Error.`;
   }
 };
 
@@ -57,8 +59,8 @@ class InformationMaker {
     } else {
       this.feelsLike = retrievedData.main.feels_like + "\u00B0F";
       this.temperature = retrievedData.main.temp + "\u00B0F";
-      this.minTemperature = retrievedData.main.temp_min + "\u00B0C";
-      this.maxTemperature = retrievedData.main.temp_max + "\u00B0C";
+      this.minTemperature = retrievedData.main.temp_min + "\u00B0F";
+      this.maxTemperature = retrievedData.main.temp_max + "\u00B0F";
       this.windSpeed = retrievedData.wind.speed + "miles/hour";
     }
   }
@@ -108,23 +110,20 @@ class InformationMaker {
  * @return {Promise<any>} - A promise that resolves to weather information
  */
 const retrieveInformation = async (location = "Lagos", standard = "metric") => {
-  try {
-    const data = await findLocationWeather(location, standard);
-    if (data.cod === 200) {
-      console.log(data);
-      if (!data.snow) {
-        data.snow = 0;
-      }
-      if (!data.rain) {
-        data.rain = 0;
-      }
-      const information = new InformationMaker(data, standard);
-      return information;
-    } else {
-      console.log(data.message);
+  console.log(standard);
+  const data = await findLocationWeather(location, standard);
+  if (data.cod === 200) {
+    if (!data.snow) {
+      data.snow = 0;
     }
-  } catch (err) {
-    console.error(err);
+    if (!data.rain) {
+      data.rain = 0;
+    }
+    const information = new InformationMaker(data, standard);
+    return information;
+  } else {
+    const errorDisplay = document.querySelector("#errorDisplay");
+    errorDisplay.textContent = `${data.message}`;
   }
 };
 

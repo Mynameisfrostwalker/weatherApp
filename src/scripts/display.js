@@ -214,24 +214,41 @@ const displayVolume = (rain, snow) => {
   }
 };
 
+/**
+ * changes background depending on time of day at location;
+ * @param {string} period - Time of day at location
+ */
 const changeBackground = (period) => {
   const container = document.querySelector("main");
   const search = document.querySelector("#searchBar");
+  let button;
   if (period === "Day") {
     container.style.color = "black";
     search.style["box-shadow"] = "0px 0px 4px 4px black";
     container.style["background-image"] = `url(${Day})`;
+    if (document.querySelector(".activeWhite")) {
+      button = document.querySelector(".activeWhite");
+      button.classList.remove("activeWhite");
+      button.classList.add("activeBlack");
+    }
   }
   if (period === "Night") {
     container.style.color = "white";
     search.style["box-shadow"] = "0px 0px 4px 4px white";
     container.style["background-image"] = `url(${Night})`;
+    if (document.querySelector(".activeBlack")) {
+      button = document.querySelector(".activeBlack");
+      button.classList.remove("activeBlack");
+      button.classList.add("activeWhite");
+    }
   }
 };
 
+/**
+ * Calls helper display functions
+ * @param {Object} weatherObj
+ */
 const display = (weatherObj) => {
-  console.log(weatherObj.rainVolume);
-  console.log(weatherObj.snowVolume);
   displayCountry(weatherObj.getFullLocation());
   displayDate(weatherObj.getDate(), weatherObj.getTime());
   displayWeatherDescription(weatherObj.description, weatherObj.icon);
@@ -244,6 +261,8 @@ const display = (weatherObj) => {
   displayMinMax(weatherObj.minTemperature, weatherObj.maxTemperature);
   displayVolume(weatherObj.rainVolume, weatherObj.snowVolume);
   changeBackground(weatherObj.getDayOrNight());
+  const errorDisplay = document.querySelector("#errorDisplay");
+  errorDisplay.textContent = "";
 };
 
 export { display };

@@ -37,9 +37,27 @@ const formCreate = () => {
   searchBar.appendChild(input);
   const span = document.createElement("span");
   span.id = "errorDisplay";
+  const standards = document.createElement("div");
+  standards.id = "standardDiv";
+
+  // metric button
+  const metricButton = document.createElement("div");
+  metricButton.textContent = "metric";
+  metricButton.id = "metricButton";
+  metricButton.className = "standards activeBlack";
+  standards.appendChild(metricButton);
+
+  // imperial button
+  const imperialButton = document.createElement("div");
+  imperialButton.textContent = "imperial";
+  imperialButton.id = "imperialButton";
+  imperialButton.className = "standards";
+  standards.appendChild(imperialButton);
+
   form.appendChild(label);
   form.appendChild(searchBar);
   form.appendChild(span);
+  form.appendChild(standards);
   form.setAttribute("novalidate", "true");
   return form;
 };

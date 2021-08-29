@@ -12,9 +12,20 @@ import { publish } from "./pubsub";
  * @function
  */
 const fetchClickInfo = async () => {
-  const input = document.querySelector("input");
-  const info = await retrieveInformation(input.value);
-  publish("display", info);
+  try {
+    let active;
+    if (document.querySelector(".activeBlack")) {
+      active = document.querySelector(".activeBlack");
+    } else {
+      active = document.querySelector(".activeWhite");
+    }
+    const input = document.querySelector("input");
+    console.log(active.textContent);
+    const info = await retrieveInformation(input.value, active.textContent);
+    publish("display", info);
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 /**
@@ -22,11 +33,22 @@ const fetchClickInfo = async () => {
  * @param {Object} event
  */
 const fetchKeyInfo = async (event) => {
-  if (event.keyCode === 13) {
-    event.preventDefault();
-    const input = document.querySelector("input");
-    const info = await retrieveInformation(input.value);
-    publish("display", info);
+  try {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      let active;
+      if (document.querySelector(".activeBlack")) {
+        active = document.querySelector(".activeBlack");
+      } else {
+        active = document.querySelector(".activeWhite");
+      }
+      const input = document.querySelector("input");
+      console.log(active.textContent);
+      const info = await retrieveInformation(input.value, active.textContent);
+      publish("display", info);
+    }
+  } catch (err) {
+    console.log(err);
   }
 };
 
