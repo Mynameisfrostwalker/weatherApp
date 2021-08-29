@@ -11,7 +11,8 @@ module.exports = {
     weatherData: "./src/scripts/weatherData.js",
     initialPage: "./src/scripts/initialPage.js",
     display: "./src/scripts/display.js",
-    switcher: "./src/scripts/switch.js",
+    switch: "./src/scripts/switch.js",
+    validation: "./src/scripts/validation.js",
   },
   devtool: "inline-source-map",
   plugins: [

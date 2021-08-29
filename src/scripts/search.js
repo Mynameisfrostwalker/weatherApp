@@ -1,5 +1,6 @@
 import { retrieveInformation } from "./weatherData";
 import { publish } from "./pubsub";
+import { validate } from "./validation";
 
 // @ts-check
 
@@ -8,7 +9,7 @@ import { publish } from "./pubsub";
  */
 
 /**
- * calls retrieveInformation function when search icon is clicked @see retrieveInformation
+ * calls retrieveInformation function when search icon is clicked @see {@link retrieveInformation}
  * @function
  */
 const fetchClickInfo = async () => {
@@ -20,16 +21,17 @@ const fetchClickInfo = async () => {
       active = document.querySelector(".activeWhite");
     }
     const input = document.querySelector("input");
-    console.log(active.textContent);
-    const info = await retrieveInformation(input.value, active.textContent);
-    publish("display", info);
+    if (validate()) {
+      const info = await retrieveInformation(input.value, active.textContent);
+      publish("display", info);
+    }
   } catch (err) {
     console.log(err);
   }
 };
 
 /**
- * calls retrieveInformation function when enter key is pressed @see retrieveInformation
+ * calls retrieveInformation function when enter key is pressed @see {@link retrieveInformation}
  * @param {Object} event
  */
 const fetchKeyInfo = async (event) => {
@@ -43,9 +45,10 @@ const fetchKeyInfo = async (event) => {
         active = document.querySelector(".activeWhite");
       }
       const input = document.querySelector("input");
-      console.log(active.textContent);
-      const info = await retrieveInformation(input.value, active.textContent);
-      publish("display", info);
+      if (validate()) {
+        const info = await retrieveInformation(input.value, active.textContent);
+        publish("display", info);
+      }
     }
   } catch (err) {
     console.log(err);

@@ -6,6 +6,7 @@ import { subscribe } from "./pubsub";
 import { searchEventListener } from "./search";
 import { display } from "./display";
 import { switchActive } from "./switch";
+import { inputEventListener } from "./validation";
 
 // @ts-check
 
@@ -17,6 +18,8 @@ import { switchActive } from "./switch";
 subscribe("pageLoaded", searchEventListener);
 
 subscribe("pageLoaded", switchActive);
+
+subscribe("pageLoaded", inputEventListener);
 
 subscribe("display", display);
 

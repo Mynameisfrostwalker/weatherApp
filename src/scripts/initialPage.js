@@ -33,6 +33,7 @@ const formCreate = () => {
   input.type = "text";
   input.name = "city";
   input.id = "search";
+  input.setAttribute("required", "");
   searchBar.appendChild(icon);
   searchBar.appendChild(input);
   const span = document.createElement("span");
