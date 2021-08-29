@@ -16,7 +16,7 @@ const findLocationWeather = async (location, standard) => {
   try {
     console.log(standard);
     const response = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=81d1f6e5ed77f7c8c9da1dcc073ad7c6&units=${standard}`,
+      `https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=81d1f6e5ed77f7c8c9da1dcc073ad7c6&units=${standard}`,
       { mode: "cors" }
     );
     const data = await response.json();
@@ -41,7 +41,7 @@ class InformationMaker {
     this.sunrise = retrievedData.sys.sunrise;
     this.sunset = retrievedData.sys.sunset;
     this.date = retrievedData.dt;
-    this.icon = `http://openweathermap.org/img/wn/${retrievedData.weather[0].icon}@2x.png`;
+    this.icon = `https://openweathermap.org/img/wn/${retrievedData.weather[0].icon}@2x.png`;
     if (retrievedData.rain["1h"]) {
       this.rainVolume = retrievedData.rain["1h"] + "mm";
     }
